@@ -1,0 +1,7 @@
+client:
+  id: acdc1508017c51604113
+  secret: d254353caa6e43170ee0fef0f3eed24e06b55688
+token:
+  secret: secretsecretsecretsecretsecretsecretsecret
+  validation:
+    second: 3600000

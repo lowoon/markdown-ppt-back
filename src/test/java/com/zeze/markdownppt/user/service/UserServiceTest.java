@@ -39,7 +39,7 @@ class UserServiceTest {
         webClient.post()
             .uri("https://github.com/login/oauth/access_token")
             .accept(MediaType.APPLICATION_JSON)
-            .bodyValue(gitHubTokenRequestDTO)
+            .syncBody(gitHubTokenRequestDTO)
             .exchange()
             .expectStatus().isOk()
             .expectBody();

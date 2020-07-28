@@ -1,0 +1,12 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: YOUR_ACCESS_KEY
+      secretKey: YOUR_SECRET_KEY
+    s3:
+      bucket: markdown-ppt-test
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    dir: image

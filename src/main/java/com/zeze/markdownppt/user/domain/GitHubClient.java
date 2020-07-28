@@ -32,7 +32,7 @@ public class GitHubClient {
         return webClient.post()
             .uri("https://github.com/login/oauth/access_token")
             .accept(MediaType.APPLICATION_JSON)
-            .bodyValue(gitHubTokenRequestDTO)
+            .syncBody(gitHubTokenRequestDTO)
             .retrieve()
             .bodyToMono(GitHubTokenResponseDTO.class)
             .block();
@@ -46,5 +46,13 @@ public class GitHubClient {
             .retrieve()
             .bodyToMono(UserInfoDTO.class)
             .block();
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
     }
 }
