@@ -27,7 +27,7 @@ import com.zeze.markdownppt.aws.web.dto.URLRequestDTO;
 
 @Service
 public class S3Service {
-    private AmazonS3 s3Client;
+    private AmazonS3 amazonS3;
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -45,7 +45,7 @@ public class S3Service {
     public void setS3Client() {
         AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
 
-        s3Client = AmazonS3ClientBuilder.standard()
+        amazonS3 = AmazonS3ClientBuilder.standard()
             // .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .withRegion(this.region)
             .build();
@@ -57,12 +57,12 @@ public class S3Service {
 
         File file = convert(multipartFile);
 
-        s3Client.putObject(new PutObjectRequest(bucket, filePath, file)
+        amazonS3.putObject(new PutObjectRequest(bucket, filePath, file)
             .withCannedAcl(CannedAccessControlList.PublicRead));
 
         file.deleteOnExit();
 
-        return s3Client.getUrl(bucket, fileName).toString();
+        return amazonS3.getUrl(bucket, filePath).toString();
     }
 
     public MultipartFile downloadFile(URLRequestDTO requestDTO) throws IOException {

@@ -1,17 +1,31 @@
 spring:
   profiles:
     include: oauth, aws
-  h2:
-    console:
-      enabled: true
+    active: local
   jpa:
+    hibernate:
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
     show-sql: true
-    hibernate:
-      ddl-auto: create
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+---
+spring:
+  profiles: local
+
 logging:
+  file:
+    path: ./logs/local
+    name: local_log
   level:
     org:
       hibernate:
@@ -19,3 +33,16 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+---
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      max-lifetime: 60000
+      connection-timeout: 3000
+    url: jdbc:mysql://localhost:3306/zeze?serverTimezone=Asia/Seoul
+    username: mariadb
+    password: root
+logging:
+  config: classpath:logback-spring.xml

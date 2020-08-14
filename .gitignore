@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+*.DS_Store
 
 ### STS ###
 .apt_generated
@@ -31,5 +32,6 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application-aws.yml
-src/main/resources/application-oauth.yml
+**/src/main/resources/application-aws.yml
+**/src/main/resources/application-oauth.yml
+**/src/main/resources/flyway.conf
